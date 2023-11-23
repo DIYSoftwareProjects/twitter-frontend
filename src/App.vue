@@ -1,5 +1,11 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <div class="twitter">
+    <div class="content-section">
+      <router-view v-slot="slotProps">
+        <component :is="slotProps.Component"></component>
+      </router-view>
+    </div>
+  </div>
 </template>
 
 <script>

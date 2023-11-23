@@ -1,0 +1,56 @@
+
+.sidebar {
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    border-right-color: rgb(228, 228, 228);
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+.twitter-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.sidebar-link {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar-link a {
+    color: black;
+}
+
+.sidebar-icon {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+}
+
+.sidebar-text {
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar-link-router {
+    cursor: pointer;
+    text-decoration: none;
+}

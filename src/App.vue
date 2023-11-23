@@ -12,12 +12,14 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import '@/styles/app.css';
+  @import '@/styles/feed.css';
+  @import '@/styles/login.css';
+  @import '@/styles/notification.css';
+  @import '@/styles/people_suggestion.css';
+  @import '@/styles/post_detail.css';
+  @import '@/styles/profile.css';
+  @import '@/styles/global.css';
+  @import '@/styles/sidebar.css';
+  @import '@/styles/signup.css';
 </style>

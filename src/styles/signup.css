@@ -1,0 +1,18 @@
+.signup-container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-span {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.signup-field {
+    width: 80%;
+    height: 80px;
+}
+

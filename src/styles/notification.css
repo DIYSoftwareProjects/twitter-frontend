@@ -1,0 +1,33 @@
+.notification-section {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.twitter-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.notification {
+  border-bottom-color: rgb(228, 228, 228);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+}
+
+.notification-content {
+    margin-left: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    font-size: 16px;
+}
+
+.no-router-link-styling {
+    text-decoration: none;
+    color: black;
+}

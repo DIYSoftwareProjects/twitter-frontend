@@ -1,18 +1,24 @@
 <template>
   <div class="twitter">
+    <SideBar />
     <div class="content-section">
       <router-view v-slot="slotProps">
         <component :is="slotProps.Component"></component>
       </router-view>
     </div>
+    <PeopleSuggestion />
   </div>
 </template>
 
 <script>
+import PeopleSuggestion from './components/PeopleSuggestion.vue';
+import SideBar from './components/SideBar.vue';
 
 export default {
   name: 'App',
   components: {
+    PeopleSuggestion, 
+    SideBar
   }
 }
 </script>

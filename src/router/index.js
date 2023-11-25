@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Feed from '../pages/Feed.vue'
+import Signup from '../pages/Signup.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,6 +12,10 @@ const router = createRouter({
     {
       path: '/feed',
       component: Feed
+    },
+    {
+      path: "/signup",
+      component: Signup
     }
   ]
 })

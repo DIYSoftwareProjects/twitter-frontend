@@ -47,5 +47,43 @@ export default {
     VueCookies.set('bearerToken', `Bearer ${authToken}`, '7d')
     VueCookies.set('userId', responseData.id, '7d')
     VueCookies.set('isAuthenticated', true)
+  },
+  loadUserData(context, payload) {
+    fetch(`http://localhost:8080/users/detail/${payload.userId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to load user data")
+      }
+      response.json().then((responseData) => {
+        context.commit('setUserData', responseData)
+      })
+    }).catch(() => {
+      throw new Error("Failed to load user data")
+    })
+  },
+  updateProfile(context, data) {
+    const formData = new FormData()
+    formData.append('bannerPicture', data.bannerPicture)
+    formData.append('profilePicture', data.profilePicture)
+    formData.append('bio', data.bio)
+
+    return fetch('http://localhost:8080/users', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: VueCookies.get('bearerToken')
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to update profile")
+      }
+    }).catch(() => {
+      throw new Error("Failed to update profile")
+    })
   }
 }

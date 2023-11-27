@@ -11,6 +11,13 @@
           <span class="sidebar-text">Home</span>
         </router-link>
       </div>
+
+      <div class="sidebar-link">
+        <router-link class="sidebar-link-router" to="/profile/self">
+          <i class="fa-solid fa-user sidebar-icon"></i>
+          <span class="sidebar-text">Profile</span>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>

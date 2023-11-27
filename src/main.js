@@ -25,6 +25,14 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = VueCookies.get('isAuthenticated')
   if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
     next('/login')
+  } else if (to.name == "Profile") {
+    const userId = to.params.userId
+    if (userId === 'self') {
+      const currentUserId = VueCookies.get('userId')
+      next(`/profile/${currentUserId}`)
+    } else {
+      next()
+    }
   } else {
     next()
   }

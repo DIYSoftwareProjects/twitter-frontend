@@ -10,8 +10,16 @@
       </div>
     </div>
 
-    <div class="profile-action">
+    <div v-if="isCurrentUser" class="profile-action">
       <button class="profile-action-button" @click="openModal">Edit</button>
+    </div>
+
+    <div v-if="!isCurrentUser && !isFollowing" class="profile-action">
+      <buttom class="profile-action-button" @click="follow">Follow</buttom>
+    </div>
+
+    <div v-if="!isCurrentUser && isFollowing" class="profile-action">
+      <buttom class="profile-action-button" @click="unfollow">Unfollow</buttom>
     </div>
 
     <div class="profile-detail-section" v-if="userData">
@@ -20,6 +28,16 @@
       <div class="joined-info">
         <i class="fa-solid fa-calendar-days"></i>
         <p class="joined-date" v-text="getJoinedDate(userData.registeredDate)"></p>
+      </div>
+
+      <div class="follow-info">
+        <div class="follower-count">
+          <span class="follower-number" v-text="userData.followers"></span> followers
+        </div>
+
+        <div class="following-count">
+          <span class="follower-number" v-text="userData.followees"></span> followees
+        </div>
       </div>
     </div>
 
@@ -50,6 +68,7 @@
 <script>
 import defaultBannerPicture from '../assets/banner/Mountain.jpg'
 import defaultProfilePicture from '../assets/profile/bear.png'
+import VueCookies from 'vue-cookies'
 
 export default {
   props: ['userId'],
@@ -61,7 +80,9 @@ export default {
       isPopUpOpen: false,
       bio: '',
       bannerPictureUpload: null,
-      profilePictureUpload: null
+      profilePictureUpload: null,
+      profileUserId: '',
+      following: false
     }
   },
   created() {
@@ -70,6 +91,12 @@ export default {
   computed: {
     userData() {
       return this.$store.getters['user/userData']
+    },
+    isCurrentUser() {
+      return VueCookies.get('userId') == this.profileUserId
+    },
+    isFollowing() {
+      return this.following
     }
   },
   watch: {
@@ -81,6 +108,11 @@ export default {
       if (data && data.profileImage) {
         this.profilePicture = `data:image/jpeg;base64,${data.profileImage}`;
       }
+      this.profileUserId = data.id
+      this.following = data.following
+    },
+    userId: function() {
+      this.loadUserData()
     }
   },
   methods: {
@@ -123,6 +155,24 @@ export default {
         bio: this.bio
       }).then(() => {
         this.closeModal()
+        this.loadUserData()
+      }).catch(error => {
+        window.alert(error)
+      })
+    },
+    follow() {
+      this.$store.dispatch('user/follow', {
+        followerUserId: this.profileUserId,
+      }).then(() => {
+        this.loadUserData()
+      }).catch(error => {
+        window.alert(error)
+      })
+    },
+    unfollow() {
+      this.$store.dispatch('user/unfollow', {
+        followerUserId: this.profileUserId,
+      }).then(() => {
         this.loadUserData()
       }).catch(error => {
         window.alert(error)

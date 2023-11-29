@@ -85,5 +85,35 @@ export default {
     }).catch(() => {
       throw new Error("Failed to update profile")
     })
+  },
+  follow(context, payload) {
+    return fetch(`http://localhost:8080/follow/${payload.followerUserId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to follow')
+      }
+    }).catch(() => {
+      throw new Error("Failed to follow")
+    })
+  },
+  unfollow(context, payload) {
+    return fetch(`http://localhost:8080/follow/${payload.followerUserId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to unfollow")
+      }
+    }).catch(() => {
+      throw new Error("Failed to unfollow")
+    })
   }
 }

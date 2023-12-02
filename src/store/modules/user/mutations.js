@@ -4,5 +4,8 @@ export default {
   },
   setCurrentUserData(state, payload) {
     state.currentUserData = payload
+  },
+  setUsers(state, payload) {
+    state.users = payload
   }
 }

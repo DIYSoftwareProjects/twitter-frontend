@@ -133,5 +133,22 @@ export default {
     }).catch(() => {
       throw new Error('failed to load current user data')
     })
+  },
+  getAllUsers(context) {
+    fetch('http://localhost:8080/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to load all users')
+      }
+      response.json().then((responseData) => {
+        context.commit('setUsers', responseData)
+      })
+    }).catch(() => {
+      throw new Error("Failed to load all users")
+    })
   }
 }

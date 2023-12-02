@@ -4,5 +4,8 @@ export default {
   },
   currentUserData(state) {
     return state.currentUserData
+  },
+  users(state) {
+    return state.users
   }
 }

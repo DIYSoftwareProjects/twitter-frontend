@@ -115,5 +115,23 @@ export default {
     }).catch(() => {
       throw new Error("Failed to unfollow")
     })
+  },
+  loadCurrentUserData(context) {
+    fetch('http://localhost:8080/users/detail/token', {
+      method: 'GET',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('failed to load current user data')
+      }
+      response.json().then((responseData) => {
+        context.commit('setCurrentUserData', responseData)
+      })
+    }).catch(() => {
+      throw new Error('failed to load current user data')
+    })
   }
 }

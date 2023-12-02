@@ -3,6 +3,7 @@ import Feed from '../pages/Feed.vue'
 import Signup from '../pages/Signup.vue'
 import Login from '../pages/Login.vue'
 import Profile from '../pages/Profile.vue'
+import PostDetail from '../pages/PostDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -37,6 +38,13 @@ const router = createRouter({
       component: Profile,
       meta: { requiresAuth: true },
       props: true
+    }, 
+    {
+      path: "/post-detail/:postId",
+      name: "PostDetail",
+      component: PostDetail,
+      props: true,
+      meta: { requiresAuth: true }
     }
   ]
 })

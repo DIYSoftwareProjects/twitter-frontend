@@ -23,6 +23,12 @@
           <i :class="getLikeIcon(tweet.hasLiked)" @click="likePost(tweet.id, tweet.hasLiked)"></i>
           <span class="like-count">{{ tweet.likeCount }}</span>
         </div>
+        <div class="comment-action">
+          <router-link class="no-router-link-styling" :to="'/post-detail/' + tweet.id">
+            <i class="fa-regular fa-comment"></i>
+            <span class="comment-count">{{ tweet.commentCount }}</span>
+          </router-link>
+        </div>
 
       </div>
     </div>

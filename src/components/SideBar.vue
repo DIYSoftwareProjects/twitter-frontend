@@ -20,6 +20,13 @@
       </div>
 
       <div class="sidebar-link">
+        <router-link class="sidebar-link-router" to="/notification">
+          <i class="fa-solid fa-bell sidebar-icon"></i>
+          <span class="sidebar-text">Notification</span>
+        </router-link>
+      </div>
+
+      <div class="sidebar-link">
         <div class="sidebar-link-router" @click="logout">
           <i class="fa-solid fa-right-from-bracket sidebar-icon"></i>
           <span class="sidebar-text">Logout</span>

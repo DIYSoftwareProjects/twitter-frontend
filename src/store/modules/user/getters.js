@@ -7,5 +7,8 @@ export default {
   },
   users(state) {
     return state.users
+  },
+  notifications(state) {
+    return state.notifications
   }
 }

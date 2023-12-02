@@ -150,5 +150,23 @@ export default {
     }).catch(() => {
       throw new Error("Failed to load all users")
     })
-  }
+  },
+  loadNotifications(context) {
+    fetch('http://localhost:8080/notifications', {
+      method: 'GET',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to load notifications")
+      }
+      response.json().then((responseData) => {
+        context.commit('setNotifications', responseData)
+      })
+    }).catch(() => {
+      throw new Error("Failed to load notifications")
+    })
+  },
 }

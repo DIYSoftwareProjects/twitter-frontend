@@ -4,6 +4,7 @@ import Signup from '../pages/Signup.vue'
 import Login from '../pages/Login.vue'
 import Profile from '../pages/Profile.vue'
 import PostDetail from '../pages/PostDetail.vue'
+import Notification from '../pages/Notification.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -44,6 +45,12 @@ const router = createRouter({
       name: "PostDetail",
       component: PostDetail,
       props: true,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: "/notification",
+      name: "Notification",
+      component: Notification,
       meta: { requiresAuth: true }
     }
   ]

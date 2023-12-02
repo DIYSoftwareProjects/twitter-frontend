@@ -7,5 +7,8 @@ export default {
   },
   setUsers(state, payload) {
     state.users = payload
+  },
+  setNotifications(state, payload) {
+    state.notifications = payload
   }
 }

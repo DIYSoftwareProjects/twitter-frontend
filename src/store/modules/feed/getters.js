@@ -7,5 +7,8 @@ export default {
   },
   comments(state) {
     return state.comments
+  },
+  userTweets(state) {
+    return state.userTweets
   }
 }

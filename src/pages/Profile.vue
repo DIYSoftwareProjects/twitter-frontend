@@ -39,6 +39,14 @@
           <span class="follower-number" v-text="userData.followees"></span> followees
         </div>
       </div>
+      
+      <div class="profile-detail-section" v-if="userTweets">
+        <div class="posts">
+          <div v-for="userTweet in userTweets" :key="userTweet.id">
+            <Post :tweet="userTweet" :reloadTweet="loadUserData"/>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="modal" v-if="isPopUpOpen">
@@ -66,6 +74,7 @@
 </template>
 
 <script>
+import Post from './Post.vue'
 import defaultBannerPicture from '../assets/banner/Mountain.jpg'
 import defaultProfilePicture from '../assets/profile/bear.png'
 import VueCookies from 'vue-cookies'
@@ -73,6 +82,9 @@ import VueCookies from 'vue-cookies'
 export default {
   props: ['userId'],
   name: 'ProfilePage',
+  components: {
+    Post
+  },
   data() {
     return {
       profilePicture: defaultProfilePicture,
@@ -97,17 +109,25 @@ export default {
     },
     isFollowing() {
       return this.following
+    },
+    userTweets() {
+      return this.$store.getters['feed/userTweets']
     }
   },
   watch: {
     userData: function(data) {
       if (data && data.bannerImage) {
         this.bannerPicture = `data:image/jpeg;base64,${data.bannerImage}`;
+      } else {
+        this.bannerPicture = defaultBannerPicture
       }
 
       if (data && data.profileImage) {
         this.profilePicture = `data:image/jpeg;base64,${data.profileImage}`;
+      } else {
+        this.profilePicture = defaultProfilePicture
       }
+
       this.profileUserId = data.id
       this.following = data.following
     },
@@ -119,6 +139,10 @@ export default {
     loadUserData() {
       try {
         this.$store.dispatch('user/loadUserData', {
+          userId: this.userId
+        })
+
+        this.$store.dispatch('feed/loadUserTweets', {
           userId: this.userId
         })
       } catch (error) {
@@ -177,7 +201,7 @@ export default {
       }).catch(error => {
         window.alert(error)
       })
-    }
+    },
   }
 }
 

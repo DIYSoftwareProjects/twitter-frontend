@@ -7,5 +7,8 @@ export default {
   },
   setComments(state, payload) {
     state.comments = payload
+  },
+  setUserTweets(state, payload) {
+    state.userTweets = payload
   }
 }

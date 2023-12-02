@@ -112,4 +112,22 @@ export default {
       throw new Error('Failed to add new comment')
     })
   },
+  loadUserTweets(context, payload) {
+    fetch(`http://localhost:8080/posts/users/${payload.userId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('failed to fetch user tweets')
+      }
+      response.json().then((responseData) => {
+        context.commit('setUserTweets', responseData)
+      })
+    }).catch(() => {
+      throw new Error('failed to fetch user tweets')
+    })
+  },
 }

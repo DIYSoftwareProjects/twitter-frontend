@@ -17,6 +17,14 @@
       <div class="post-content">
         {{ tweet.content }}
       </div>
+
+      <div class="post-actions">
+        <div class="like-action">
+          <i :class="getLikeIcon(tweet.hasLiked)" @click="likePost(tweet.id, tweet.hasLiked)"></i>
+          <span class="like-count">{{ tweet.likeCount }}</span>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -27,8 +35,14 @@ import defaultProfilePicture from '../assets/profile/bear.png'
 
 export default {
   name: 'PostPage',
-  props: ['tweet'],
+  props: ['tweet', 'reloadTweet'],
   methods: {
+    getLikeIcon(hasLiked) {
+      if (hasLiked) {
+        return "fa-solid fa-heart"
+      }
+      return "fa-regular fa-heart"
+    },
     getTimeAgo(createdAt) {
       const now = new Date()
       const diffInMiliseconds = now - new Date(createdAt)
@@ -57,6 +71,16 @@ export default {
         return defaultProfilePicture
       }
     },
+    likePost(tweetId, like) {
+      this.$store.dispatch('feed/likePost', {
+        tweetId: tweetId,
+        like: !like
+      }).then(() => {
+        this.reloadTweet()
+      }).catch(error => {
+        window.alert(error)
+      })
+    }
   }
 }
 </script>

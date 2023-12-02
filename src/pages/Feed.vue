@@ -13,7 +13,7 @@
     </div>
     <div class="posts">
       <div v-for="tweet in feedTweets" :key="tweet.id">
-        <Post :tweet="tweet" />
+        <Post :tweet="tweet" :reloadTweet="loadFeedTweets"/>
       </div>
     </div>
   </div>

@@ -38,5 +38,22 @@ export default {
     }).catch(() => {
       throw new Error('failed to load tweets')
     })
+  },
+  likePost(context, data) {
+    let method = data.like ? 'POST' : 'DELETE';
+
+    return fetch(`http://localhost:8080/like/${data.tweetId}`, {
+      method: method,
+      headers: {
+        Authorization: VueCookies.get('bearerToken'),
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to like a post')
+      }
+    }).catch(() => {
+      throw new Error('Failed to like a post')
+    })
   }
 }
